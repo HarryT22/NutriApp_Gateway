@@ -1,0 +1,87 @@
+server:
+  port: 8080
+
+logging.level.io.github.resilience4j: DEBUG
+
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 5s
+      routes:
+        - id: listNormal
+          uri: http://sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/searchbar/{name}/{f}/{l}/{h}/{vegan}/{vegetarisch}/{mink}/{maxk}/{minp}/{maxp}
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/home
+        - id: saveRezept
+            uri: http://sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
+            predicates:
+              - Path=/rest/searchbar/addR/{name}/{az}/{kz}/{p}/{ma}/{iv}/{ivt}/{h}/{l}/{f}
+            filters:
+              - name: CircuitBreaker
+                args:
+                  name: CircuitBreaker
+                  fallbackUri: forward:/home
+        - id: addFood
+            uri: http://sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
+            predicates:
+              - Path=/rest/searchbar/{id}/addF/{name}/{k}/{p}/{menge}
+            filters:
+              - name: CircuitBreaker
+                args:
+                  name: CircuitBreaker
+                  fallbackUri: forward:/home
+        - id: deleteRezept
+            uri: http://sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
+            predicates:
+              - Path=/rest/searchbar/delete/{id}
+            filters:
+              - name: CircuitBreaker
+                args:
+                  name: CircuitBreaker
+                  fallbackUri: forward:/home
+        - id: deleteFoodFromRezept
+            uri: http://sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
+            predicates:
+              - Path=/rest/searchbar/{rId}/deleteF/{fId}
+            filters:
+              - name: CircuitBreaker
+                args:
+                  name: CircuitBreaker
+                  fallbackUri: forward:/home
+        - id: fallbackService
+          uri: http://test-sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/home
+
+resilience4j.circuitbreaker:
+  instances:
+    CircuitBreaker:
+      slidingWindowSize: 20
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 5
+      failureRateThreshold: 50
+      waitDurationInOpenState: 20s
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      permittedNumberOfCallsInHalfOpenState: 3
+      eventConsumerBufferSize: 10
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.util.concurrent.TimeoutException
+        - java.io.IOException
+        - org.springframework.cloud.gateway.support.TimeoutException
+        - org.springframework.web.server.ResponseStatusException
+      registerHealthIndicator: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics
+
