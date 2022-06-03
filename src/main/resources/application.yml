@@ -10,53 +10,26 @@ spring:
         connect-timeout: 1000
         response-timeout: 5s
       routes:
-        - id: listNormal
+        - id: searchbarMicroservice
           uri: http://sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
           predicates:
-            - Path=/rest/searchbar/{name}/{f}/{l}/{h}/{vegan}/{vegetarisch}/{mink}/{maxk}/{minp}/{maxp}
+            - Path=/rest/searchbar/**
           filters:
             - name: CircuitBreaker
               args:
                 name: CircuitBreaker
                 fallbackUri: forward:/home
-        - id: saveRezept
-            uri: http://sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
+        - id: searchbarMicroserviceTest
+            uri: http://test-sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
             predicates:
-              - Path=/rest/searchbar/addR/{name}/{az}/{kz}/{p}/{ma}/{iv}/{ivt}/{h}/{l}/{f}
-            filters:
-              - name: CircuitBreaker
-                args:
-                  name: CircuitBreaker
-                  fallbackUri: forward:/home
-        - id: addFood
-            uri: http://sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
-            predicates:
-              - Path=/rest/searchbar/{id}/addF/{name}/{k}/{p}/{menge}
-            filters:
-              - name: CircuitBreaker
-                args:
-                  name: CircuitBreaker
-                  fallbackUri: forward:/home
-        - id: deleteRezept
-            uri: http://sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
-            predicates:
-              - Path=/rest/searchbar/delete/{id}
-            filters:
-              - name: CircuitBreaker
-                args:
-                  name: CircuitBreaker
-                  fallbackUri: forward:/home
-        - id: deleteFoodFromRezept
-            uri: http://sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
-            predicates:
-              - Path=/rest/searchbar/{rId}/deleteF/{fId}
+              - Path=/rest/searchbar/**
             filters:
               - name: CircuitBreaker
                 args:
                   name: CircuitBreaker
                   fallbackUri: forward:/home
         - id: fallbackService
-          uri: http://test-sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
+          uri: google.com
           predicates:
             - Path=/home
 
