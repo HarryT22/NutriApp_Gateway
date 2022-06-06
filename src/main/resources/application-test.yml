@@ -20,14 +20,14 @@ spring:
                 name: CircuitBreaker
                 fallbackUri: forward:/fallbackNutriInput
         - id: createMealWithDateAndCategory
-            uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
-            predicates:
-              - Path=/rest/meal/{day}/{month}/{year}/{category}
-            filters:
-              - name: CircuitBreaker
-                args:
-                  name: CircuitBreaker
-                  fallbackUri: forward:/fallbackNutriInput
+          uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/meal/{day}/{month}/{year}/{category}
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
         - id: updateFoodQuantity
           uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
           predicates:
@@ -38,92 +38,92 @@ spring:
                 name: CircuitBreaker
                 fallbackUri: forward:/fallbackNutriInput
         - id: deleteAFoodFromMeal
-            uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
-            predicates:
-              - Path=/rest/meal/{mealId}/{foodId}
-            filters:
-              - name: CircuitBreaker
-                args:
-                  name: CircuitBreaker
-                  fallbackUri: forward:/fallbackNutriInput
+          uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/meal/{mealId}/{foodId}
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
 
         - id: addFoodToMeal
-            uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
-            predicates:
-              - Path=/rest/meal/{mealId}/{foodId}/{quantity}
-            filters:
-              - name: CircuitBreaker
-                args:
-                  name: CircuitBreaker
-                  fallbackUri: forward:/fallbackNutriInput
+          uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/meal/{mealId}/{foodId}/{quantity}
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
         - id: getFoodById
-            uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
-            predicates:
-              - Path=/rest/food/{id}
-            filters:
-              - name: CircuitBreaker
-                args:
-                  name: CircuitBreaker
-                  fallbackUri: forward:/fallbackNutriInput
+          uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/food/{id}
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
         - id: getFoodByName
-            uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
-            predicates:
-              - Path=/rest/food/name={name}
-            filters:
-              - name: CircuitBreaker
-                args:
-                  name: CircuitBreaker
-                  fallbackUri: forward:/fallbackNutriInput
+          uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/food/name={name}
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
 
         - id: getFoodInfo
-            uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
-            predicates:
-              - Path=/rest/food/getInfo/{id}
-            filters:
-              - name: CircuitBreaker
-                args:
-                  name: CircuitBreaker
-                  fallbackUri: forward:/fallbackNutriInput
+          uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/food/getInfo/{id}
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
 
         - id: PostExcel
-            uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
-            predicates:
-              - Path=/rest/food/
-            filters:
-              - name: CircuitBreaker
-                args:
-                  name: CircuitBreaker
-                  fallbackUri: forward:/fallbackNutriInput
+          uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/food/
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
 
         - id: getMineralsById
-            uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
-            predicates:
-              - Path=/rest/minerals/{id}
-            filters:
-              - name: CircuitBreaker
-                args:
-                  name: CircuitBreaker
-                  fallbackUri: forward:/fallbackNutriInput
+          uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/minerals/{id}
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
 
         - id: getVitaminsById
-            uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
-            predicates:
-              - Path=/rest/vitamins/{id}
-            filters:
-              - name: CircuitBreaker
-                args:
-                  name: CircuitBreaker
-                  fallbackUri: forward:/fallbackNutriInput
+          uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/vitamins/{id}
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
 
         - id: getNutritionalValues
-            uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
-            predicates:
-              - Path=/rest/nutritionalValues/{id}
-            filters:
-              - name: CircuitBreaker
-                args:
-                  name: CircuitBreaker
-                  fallbackUri: forward:/fallbackNutriInput
+          uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/nutritionalValues/{id}
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
 
         - id: fallbackServiceNutriApp
           uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
