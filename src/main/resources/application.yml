@@ -10,30 +10,6 @@ spring:
         connect-timeout: 1000
         response-timeout: 5s
       routes:
-        - id: searchbarMicroservice
-          uri: http://sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
-          predicates:
-            - Path=/rest/searchbar/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: CircuitBreaker
-                fallbackUri: forward:/home
-        - id: searchbarMicroserviceTest
-          uri: http://sweng-sweng-team12-nutriapp-searchbar.wi-k8s.fh-muenster.de
-          predicates:
-              - Path=/rest/searchbar/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: CircuitBreaker
-                fallbackUri: forward:/home
-
-        - id: fallbackService
-          uri: google.com
-          predicates:
-            - Path=/home
-
         - id: getMealById
           uri: http://sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
           predicates:
