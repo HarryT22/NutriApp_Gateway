@@ -37,6 +37,24 @@ spring:
               args:
                 name: CircuitBreaker
                 fallbackUri: forward:/fallbackNutriInput
+        - id: getMealByDate
+          uri: http://sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/meal/{day}/{month}/{year}
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
+        - id: getAJoke
+          uri: http://sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/meal/tellAJoke/{category}
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
         - id: createMealWithDateAndCategory
           uri: http://sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
           predicates:
@@ -93,15 +111,6 @@ spring:
                 name: CircuitBreaker
                 fallbackUri: forward:/fallbackNutriInput
 
-        - id: getFoodInfo
-          uri: http://sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
-          predicates:
-            - Path=/rest/food/getInfo/{id}
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: CircuitBreaker
-                fallbackUri: forward:/fallbackNutriInput
 
         - id: PostExcel
           uri: http://sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
