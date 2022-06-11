@@ -10,6 +10,24 @@ spring:
         connect-timeout: 500
         response-timeout: 500
       routes:
+        - id: login
+          uri: http://sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/login
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
+        - id: registration
+          uri: http://sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
+          predicates:
+            - Path=/rest/registration
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: CircuitBreaker
+                fallbackUri: forward:/fallbackNutriInput
         - id: getMealById
           uri: http://test-sweng-sweng-team12-nutritionapp.wi-k8s.fh-muenster.de
           predicates:
